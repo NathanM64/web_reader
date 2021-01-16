@@ -44,6 +44,12 @@ class Chapter
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Book::class, inversedBy="chapters")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
+
 
     public function __construct()
     {
@@ -129,6 +135,18 @@ class Chapter
                 $comment->setChapter(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

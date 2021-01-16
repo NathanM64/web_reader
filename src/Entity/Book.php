@@ -30,11 +30,6 @@ class Book
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $genre;
-
-    /**
      * @ORM\Column(type="string", length=100)
      */
     private $Author;
@@ -54,10 +49,27 @@ class Book
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="books")
+     */
+    private $genre;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Chapter::class, mappedBy="book")
+     */
+    private $chapters;
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->genre = new ArrayCollection();
+        $this->chapters = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,18 +97,6 @@ class Book
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getGenre(): ?string
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(?string $genre): self
-    {
-        $this->genre = $genre;
 
         return $this;
     }
@@ -161,6 +161,72 @@ class Book
             // set the owning side to null (unless already changed)
             if ($comment->getBook() === $this) {
                 $comment->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenre(): Collection
+    {
+        return $this->genre;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->genre->contains($genre)) {
+            $this->genre[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        $this->genre->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Chapter[]
+     */
+    public function getChapters(): Collection
+    {
+        return $this->chapters;
+    }
+
+    public function addChapter(Chapter $chapter): self
+    {
+        if (!$this->chapters->contains($chapter)) {
+            $this->chapters[] = $chapter;
+            $chapter->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChapter(Chapter $chapter): self
+    {
+        if ($this->chapters->removeElement($chapter)) {
+            // set the owning side to null (unless already changed)
+            if ($chapter->getBook() === $this) {
+                $chapter->setBook(null);
             }
         }
 
