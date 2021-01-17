@@ -46,7 +46,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive2">
             <div class="navbar-nav">
-                <a class="sub-nav nav-item nav-link active" href="/">Action</a>
+                {% for genre in genre_repo.findAll() %}
+                    <a href="{{ path('book_by_genre', { id: genre.id }) }}" class="sub-nav nav-item nav-link active">{{ genre.name }}</a>
+                {% endfor %}
             </div>
             <div class="user-item">
                     {% if app.user %}
@@ -81,7 +83,7 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-2 bg-secondary fixed-bottom">
+<footer class="py-2 bg-secondary">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
     </div>

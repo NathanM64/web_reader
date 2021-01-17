@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use App\Entity\Chapter;
+use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -66,4 +67,14 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getLatestPaginatedBooksByCategory(Genre $genre, PaginatorInterface $paginator, $page = 1): \Knp\Component\Pager\Pagination\PaginationInterface
+    {
+        $query = $this->createCommonQueryBuilder()
+        ->leftJoin('b.genre', 'g')
+        ->where('g = :genre')
+        ->setParameter('genre', $genre)
+        ->getQuery();
+
+        return $paginator->paginate($query, $page, 20);
+    }
 }

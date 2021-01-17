@@ -21,39 +21,4 @@ class BookController extends AbstractController
             'genres' => $genres
         ]);
     }
-
-    /**
-     * @Route("/book/add", name="book_add")
-     * @Route("/book/edit/{id}", name="book_edit")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY') and (book === null or book.getUser() == user)")
-     */
-//    public function bookForm(Request $request, EntityManagerInterface $manager, book $book = null): Response
-//    {
-////        if($this->getUser() === null || ($book && $book->getUser() != $this->getUser())) {
-////            throw $this->createAccessDeniedException();
-////        }
-//        if($book === null) {
-//            $book = new book();
-//        }
-//
-//        $bookForm = $this->createForm(bookType::class, $book);
-//
-//        $bookForm->handleRequest($request);
-//
-//        if($bookForm->isSubmitted() && $bookForm->isValid()) {
-//            // enregistrement du jeu en base de données
-//            if( ! $book->getId()) {
-//                $book->setDateAdd(new \DateTime());
-//                $book->setUser($this->getUser());
-//            }
-//            $manager->persist($book);
-//            $manager->flush();
-//            return $this->redirectToRoute('profile');
-//        }
-//
-//        return $this->render('book/book-form.html.twig', [
-//            'book_form' => $bookForm->createView(),
-//            'book' => $book
-//        ]);
-//    }
 }

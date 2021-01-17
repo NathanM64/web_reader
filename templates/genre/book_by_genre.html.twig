@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}Accueil{% endblock %}
+{% block title %}{{ parent() }}{{ genre.name }}{% endblock %}
 
 {% block body %}
+    <h3>{{ genre.name }}</h3>
+
     <div class="content-header">
-        <h4>Livres</h4>
+        <h4>Résultats</h4>
     </div>
     <div class="row">
         {% set nbBooks = books|length/2 %}
 
+        {% if nbBooks > 0 %}
         {% for i in 0..nbBooks-1 %}
+
             <div class="page-listing-item">
                 <div class="row">
                     {% for book in books|slice( 2*i  , 2) %}
@@ -54,6 +58,11 @@
                 </div>
             </div>
         {% endfor %}
+        {% else %}
+            <div style="margin: auto">
+                <p>Aucun résultat</p>
+            </div>
+        {% endif %}
     </div>
     {{ knp_pagination_render(books) }}
 {% endblock %}
