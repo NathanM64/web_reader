@@ -69,7 +69,7 @@
         <ul class="chapter-list">
             {% for chapter in book.chapters %}
                 <li>
-                    <a href="">Chaptitres {{ chapter.number }}</a>
+                    <a href="{{ path('chapter', { id: chapter.id }) }}">Chapitres {{ chapter.number }}</a>
                     <span class="chapter-release">
                         {{ chapter.dateadd|date('d/m/Y') }}
                     </span>

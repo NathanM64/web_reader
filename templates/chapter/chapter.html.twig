@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChapterController!{% endblock %}
+
+{% block body %}
+    <h3>{{ chapter.book.title }} - Chapitre {{ chapter.number }}</h3>
+    <div class="chapter-content" style="text-align: justify">
+        {{ chapter.content }}
+    </div>
+    <div class="action-chapter-button">
+        {% if hasAPrevious %}
+            <a href="{{ path('chapter', { id: previousChapter.id }) }}" class="btn btn-lt btn-primary"><i class="bi-arrow-left"></i>Précèdent</a>
+        {% endif %}
+        {% if hasANext %}
+            <a href="{{ path('chapter', { id: nextChapter.id }) }}" class="btn btn-lt btn-primary">Suivant<i class="bi-arrow-right"></i></a>
+        {% else %}
+            <a href="{{ path('book_details', { id: chapter.book.id }) }}" class="btn btn-lt btn-primary">Fiche du livre</a>
+        {% endif %}
+    </div>
+{% endblock %}

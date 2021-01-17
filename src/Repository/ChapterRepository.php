@@ -19,6 +19,31 @@ class ChapterRepository extends ServiceEntityRepository
         parent::__construct($registry, Chapter::class);
     }
 
+    public function getNextChapter(Chapter $chapter)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.book', 'b')
+            ->andWhere('c.number = :nextChapter')
+            ->andWhere('b.id = :book_id')
+            ->setParameter('nextChapter', $chapter->getNumber()+1)
+            ->setParameter('book_id', $chapter->getBook()->getId())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function getPreviousChapter(Chapter $chapter)
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.book', 'b')
+            ->andWhere('c.number = :previousChapter')
+            ->andWhere('b.id = :book_id')
+            ->setParameter('previousChapter', $chapter->getNumber()-1)
+            ->setParameter('book_id', $chapter->getBook()->getId())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
     // /**
     //  * @return Chapter[] Returns an array of Chapter objects
     //  */
