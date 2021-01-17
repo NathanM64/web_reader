@@ -1,0 +1,105 @@
+.content-area{
+    background-color: #DDDDDD;
+    padding-bottom: 100px;
+}
+
+.tab-summary{
+    padding: 15px 0 50px;
+    display: table;
+    width: 100%;
+}
+
+.summary-image{
+    width: 225px;
+    padding: 15px;
+    background: #fff;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.summary-content-wrap{
+    overflow: hidden;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 30px;
+    position: relative;
+}
+
+.summary-content{
+    background-color: #FFFFFF;
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    right: 0;
+    padding: 20px 30px 30px;
+    min-height: 318px;
+}
+
+.post-content{
+    width: 70%;
+    position: relative;
+}
+.post-rating{
+    margin-bottom: 12px;
+    position: relative;
+    transition: opacity ease-in 0.5s;
+}
+
+.post-content-item{
+    font-size: 0;
+}
+
+.item-summary-heading{
+    width: 106px;
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.item-summary-content{
+    width: calc(100% - 106px);
+    word-break: break-word;
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.book-description{
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 35px;
+}
+
+.chapter-list{
+    padding-left: 0;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    max-height: 550px;
+    display: block;
+    overflow: hidden;
+    word-break: break-word;
+    word-wrap: break-word;
+    line-height: 30px;
+    position: relative;
+}
+
+.chapter-list li{
+    position: relative;
+    list-style: none;
+    border-bottom: 2px solid #FFFFFF;
+}
+
+.chapter-list a{
+    font-weight: 600;
+    padding: 15px 0;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.chapter-release{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}

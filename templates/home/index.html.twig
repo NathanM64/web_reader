@@ -15,12 +15,12 @@
                         <div class="col-12 col-md-6 badge-pos-1">
                             <div class="page-item-detail">
                                 <div class="item-cover">
-                                    <a href=""><img class="card-img h-150 w-110" src="{{ book.cover|default('http://placehold.it/100x130') }}" alt=""></a>
+                                    <a href="{{ path('book_details', { id: book.id }) }}"><img class="card-img h-150 w-110" src="{{ book.cover|default('http://placehold.it/100x130') }}" alt=""></a>
                                 </div>
                                 <div class="item-summary">
                                     <div class="item-title font-title">
                                         <h3 class="h5">
-                                            <a href="">{{ book.title }}</a>
+                                            <a href="{{ path('book_details', { id: book.id }) }}">{{ book.title }}</a>
                                         </h3>
                                     </div>
                                     <div class="item-rating">

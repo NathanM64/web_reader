@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Lire {{ book.title }}{% endblock %}
+{% block stylesheets %}<link href="{{ asset('css/detail_view.css') }}" rel="stylesheet">{% endblock %}
+{% block body %}
+    <div class="profile-book">
+        <h3>{{ book.title }}</h3>
+        <div class="tab-summary">
+            <div class="summary-image">
+                <img width="200" src="{{ book.cover ? vich_uploader_asset(book, 'coverFile') : 'http://placehold.it/1000x1300' }}" alt="">
+            </div>
+            <div class="summary-content-wrap">
+                <div class="summary-content">
+                    <div class="post-content">
+                        <div class="post-rating">
+                            {% set rating = book.rating %}
+                            {% for i in 1..rating %}
+                                <i class="bi bi-star-fill"></i>
+                            {% endfor %}
+                            {% if rating != 5 %}
+                                {% for i in 1..5-rating %}
+                                    <i class="bi bi-star"></i>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="post-content-item">
+                            <div class="item-summary-heading">
+                                <h6>Auteur</h6>
+                            </div>
+                            <div class="item-summary-content">
+                                {{ book.author }}
+                            </div>
+                        </div>
+                        <div class="post-content-item">
+                            <div class="item-summary-heading">
+                                <h6>Genre(s)</h6>
+                            </div>
+                            <div class="item-summary-content">
+                                {% for genre in genres %}
+                                    {{ genre.name }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="post-content-item">
+                            <div class="item-summary-heading">
+                                <h6>Types</h6>
+                            </div>
+                            <div class="item-summary-content">
+                                {{ book.type }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header">
+        <h4>Synopsis</h4>
+    </div>
+    <div class="book-description">
+        <p>
+            {{ book.description }}
+        </p>
+    </div>
+    <div class="content-header">
+        <h4>Chapitres</h4>
+    </div>
+    <div class="chapter-item">
+        <ul class="chapter-list">
+            {% for chapter in book.chapters %}
+                <li>
+                    <a href="">Chaptitres {{ chapter.number }}</a>
+                    <span class="chapter-release">
+                        {{ chapter.dateadd|date('d/m/Y') }}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+{#    <p>{{ book.description }}</p>#}
+{#    {% if is_granted('CREATE_LOAN', book) %}#}
+{#        <a class="btn btn-outline-success" href="{{ path('create_loan', {id: book.id}) }}">Emprunter</a>#}
+{#    {% endif %}#}
+{#    <a class="btn btn-success" href="{{ path('home') }}">Revenir à la page d'accueil</a>#}
+{#    <a class="btn btn-info" href="{{ path('user_details', { id : book.user.id }) }}">Voir l'utilisateur du jeu</a>#}
+{% endblock %}

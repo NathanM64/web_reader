@@ -1,0 +1,13 @@
+vich_uploader:
+  db_driver: orm
+
+  mappings:
+    avatar:
+      uri_prefix: /avatar
+      upload_destination: '%kernel.project_dir%/public/image/avatar'
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    coverBook:
+      uri_prefix: /cover_book
+      upload_destination: '%kernel.project_dir%/public/image/cover_book'
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

@@ -1,0 +1,74 @@
+.navbar{
+  padding: 20px;
+  font-weight: 600;
+}
+.sub-nav{
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  padding: 7px;
+  display: block;
+}
+
+.user-item{
+  /*text-align: right;*/
+  /*width: auto;*/
+  margin-left: auto;
+}
+
+.content-header{
+  border-bottom: 2px solid #ebebeb;
+  margin-bottom: 35px;
+}
+.content-header h4{
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.page-listing-item{
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  width: -webkit-fill-available;
+}
+
+.page-item-detail{
+  margin-bottom: 20px;
+}
+
+.item-cover{
+  width: 100px;
+  float: left;
+  overflow: hidden;
+  margin-right: 20px;
+}
+
+.item-summary{
+  overflow: hidden;
+}
+
+.font-title a{
+  font-weight: 600;
+  color: #333333;
+}
+
+.item-rating{
+  margin-bottom: 7px;
+}
+
+.chapter-item{
+  margin-bottom: 10px;
+}
+
+.chapter{
+  background-color: #ebebeb;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: background-color 200ms ease;
+}
+
+.pagination{
+  justify-content: center;
+}

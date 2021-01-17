@@ -6,9 +6,12 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
+ * @Vich\Uploadable()
  */
 class Book
 {
@@ -43,6 +46,12 @@ class Book
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cover;
+
+    /**
+     * @Vich\UploadableField(mapping="coverBook", fileNameProperty="cover")
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg"}, maxSize="2M")
+     */
+    private $coverFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="book")
@@ -133,6 +142,25 @@ class Book
     public function setCover(?string $cover): self
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoverFile()
+    {
+        return $this->coverFile;
+    }
+
+    /**
+     * @param mixed $coverFile
+     * @return Book
+     */
+    public function setCoverFile($coverFile): Book
+    {
+        $this->coverFile = $coverFile;
 
         return $this;
     }
