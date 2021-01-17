@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Chapter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +19,23 @@ class BookRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);
+    }
+
+    private function createCommonQueryBuilder()
+    {
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.title', 'ASC')
+            ->leftJoin('b.chapters', 'c')
+            ->addSelect('c');
+
+    }
+
+    public function getLatestPaginatedBooks(PaginatorInterface $paginator, $page = 1)
+    {
+        $query = $this->createCommonQueryBuilder()
+        ->getQuery();
+
+        return $paginator->paginate($query, $page, 20);
     }
 
     // /**

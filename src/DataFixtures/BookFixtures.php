@@ -10,7 +10,7 @@ use Faker;
 
 class BookFixtures extends Fixture implements DependentFixtureInterface
 {
-    const BOOK_COUNT = 50;
+    const BOOK_COUNT = 60;
     const TYPE = [
         "Roman",
         "Manga",
@@ -28,7 +28,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
             $book->setType(self::TYPE[random_int(0, count(self::TYPE)-1)]);
             $book->setDescription($faker->text(25));
             $book->setAuthor($faker->firstName.' '.$faker->lastName);
-            $book->setRating(0);
+            $book->setRating(random_int(1.0, 5.0));
 
             for($j = 0; $j < random_int(0, 4); $j++) {
                 $book->addGenre($this->getReference('genre'.random_int(0, count(GenreFixtures::GENRE) - 1)));

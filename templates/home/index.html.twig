@@ -3,5 +3,75 @@
 {% block title %}{{ parent() }}Accueil{% endblock %}
 
 {% block body %}
+    <div class="content-header">
+        <h4>Dernières sorties</h4>
+    </div>
+    <div class="row">
+        {% for i in 0..9 %}
 
+            <div class="page-listing-item">
+                <div class="row">
+                    {% for book in books|slice( 2*i  , 2) %}
+                        <div class="col-12 col-md-6 badge-pos-1">
+                            <div class="page-item-detail">
+                                <div class="item-cover">
+                                    <a href=""><img class="card-img h-150 w-110" src="{{ book.cover|default('http://placehold.it/100x130') }}" alt=""></a>
+                                </div>
+                                <div class="item-summary">
+                                    <div class="item-title font-title">
+                                        <h3 class="h5">
+                                            <a href="">{{ book.title }}</a>
+                                        </h3>
+                                    </div>
+                                    <div class="item-rating">
+                                        {% set rating = book.rating %}
+                                        {% for i in 1..rating %}
+                                            <i class="bi bi-star-fill"></i>
+                                        {% endfor %}
+                                        {% if rating != 5 %}
+                                            {% for i in 1..5-rating %}
+                                                <i class="bi bi-star"></i>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="list-chapter">
+                                        <div class="chapter-item">
+                                            <span class="chapter">
+                                                <a href="">Chapter 2</a>
+                                            </span>
+                                        </div>
+                                        <div class="chapter-item">
+                                            <span class="chapter">
+                                                <a href="">Chapter 1</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+{#            <div class="col-lg-4 col-md-6 mb-4">#}
+{#                <div class="card h-350 w-150">#}
+{#                    <a href=""><img class="card-img h-150 w-110" src="{{ book.cover|default('http://placehold.it/800x500') }}" alt=""></a>#}
+{#                    <div class="card-body">#}
+{#                        <h4 class="card-title">#}
+{#                            <a href="">{{ book.title }}</a>#}
+{#                        </h4>#}
+{#                        <h5>par {{ book.author }}</h5>#}
+{#                        <p class="card-text">{{ book.description }}</p>#}
+{#                    </div>#}
+{#                    <div class="card-footer">#}
+{#                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+        {% endfor %}
+
+    </div>
+    {{ knp_pagination_render(books) }}
 {% endblock %}
