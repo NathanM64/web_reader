@@ -6,12 +6,17 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Vich\Uploadable()
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -44,6 +49,12 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar", fileNameProperty="avatar")
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg"}, maxSize="2M")
+     */
+    private $avatarFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -214,5 +225,41 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatarFile()
+    {
+        return $this->avatarFile;
+    }
+
+    /**
+     * @param mixed $avatarFile
+     * @return User
+     */
+    public function setAvatarFile($avatarFile)
+    {
+        $this->avatarFile = $avatarFile;
+
+        return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            'id' => $this->id,
+            'mail' => $this->mail,
+            'password' => $this->password
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        $infos = unserialize($serialized);
+        $this->id = $infos['id'];
+        $this->mail = $infos['mail'];
+        $this->password = $infos['password'];
     }
 }

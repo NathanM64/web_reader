@@ -11,9 +11,8 @@
 }
 
 .user-item{
-  /*text-align: right;*/
-  /*width: auto;*/
   margin-left: auto;
+  display: inline-flex;
 }
 
 .content-header{

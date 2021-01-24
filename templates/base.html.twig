@@ -53,10 +53,10 @@
             </div>
             <div class="user-item">
                     {% if app.user %}
-                        {{ user_link('logout', 'Déconnexion') }}
+                        {{ user_link('profile', 'Profile') }}{{ user_link('logout', 'Déconnexion') }}
                     {% else %}
                         {{ user_link('login', 'Connexion') }}
-                        {#                        {{ menu_link('app_register', 'Inscription') }}#}
+{#                        {{ menu_link('app_register', 'Inscription') }}#}
                     {% endif %}
             </div>
         </div>
