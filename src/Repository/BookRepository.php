@@ -39,6 +39,13 @@ class BookRepository extends ServiceEntityRepository
         return $paginator->paginate($query, $page, 20);
     }
 
+    public function countAllBooks(){
+        $queryBuilder = $this->createQueryBuilder('b');
+        $queryBuilder->select('count(b.id) as value');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

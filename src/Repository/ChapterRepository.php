@@ -43,6 +43,13 @@ class ChapterRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function countAllChapters(){
+        $queryBuilder = $this->createQueryBuilder('c');
+        $queryBuilder->select('count(c.id) as value');
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
 
     // /**
     //  * @return Chapter[] Returns an array of Chapter objects

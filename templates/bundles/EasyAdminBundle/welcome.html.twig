@@ -1,0 +1,27 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title 'Welcome to EasyAdmin 3' %}
+
+{% block page_content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3 alert-info">
+                <span class="display-3">{{ countAllUsers.value }}</span>Utilisateurs
+            </div>
+            <div class="col-3 alert-success">
+                <span class="display-3">{{ countAllBooks.value }}</span>Livres
+            </div>
+            <div class="col-3 alert-info">
+                <span class="display-3">{{ countAllChapters.value }}</span>Chapitres
+            </div>
+            <div class="col-3 alert-success">
+                <span class="display-3">{{ countAllComments.value }}</span>Commentaires
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
