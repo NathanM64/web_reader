@@ -36,16 +36,13 @@
                                         {% endif %}
                                     </div>
                                     <div class="list-chapter">
+                                        {% for chapter in book.chapters|reverse|slice(0, 2) %}
                                         <div class="chapter-item">
                                             <span class="chapter">
-                                                <a href="">Chapter 2</a>
+                                                <a href="{{ path('chapter', { id: chapter.id }) }}">Chapter {{ chapter.number }}</a>
                                             </span>
                                         </div>
-                                        <div class="chapter-item">
-                                            <span class="chapter">
-                                                <a href="">Chapter 1</a>
-                                            </span>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
